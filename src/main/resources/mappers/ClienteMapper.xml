@@ -8,33 +8,33 @@
     <select parameterType="map" id="getClientes" resultMap="ClienteResult">
         select
     
-    c.nombre,
-    c.documento,
-    c.telefono,
-    c.direccion,
-    c.email,
-    c.vetado,
+        c.nombre,
+        c.documento,
+        c.telefono,
+        c.direccion,
+        c.email,
+        c.vetado,
     
-    ir.id ,
-    ir.CLIENTES_documento ,
-    ir.fechainiciorenta ,
-    ir.fechafinrenta ,
+        ir.id ,
+        ir.CLIENTES_documento ,
+        ir.fechainiciorenta ,
+        ir.fechafinrenta ,
     
-    i.id ,
-    i.nombre ,
-    i.descripcion ,
-    i.fechalanzamiento ,
-    i.tarifaxdia ,
-    i.formatorenta ,
-    i.genero ,        
-    ti.id ,
-    ti.descripcion 
+        i.id ,
+        i.nombre ,
+        i.descripcion ,
+        i.fechalanzamiento ,
+        i.tarifaxdia ,
+        i.formatorenta ,
+        i.genero ,        
+        ti.id ,
+        ti.descripcion 
 
     
-    FROM VI_CLIENTES as c 
-    left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
-    left join VI_ITEMS as i on ir.ITEMS_id=i.id 
-    left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+        FROM VI_CLIENTES as c 
+        left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+        left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
         
     </select>
       
@@ -47,14 +47,32 @@
         <result property='email' column='email'/>   
         <result property='vetado' column='vetado'/>  
         <collection property='rentados' ofType='ItemRentado'></collection>
-      <!-- <association property="propiedad5" javaType="DetalleDos"></association>   -->   
+        <!-- <association property="propiedad5" javaType="DetalleDos"></association>   -->   
     </resultMap>       
              
-      <resultMap type='ItemRentado' id='ClienteResult'>
+    <resultMap type='ItemRentado' id='ClienteResult'>
         <id property='id' column='id'/>
         <result property='fechainiciorenta' column='fechainiciorenta'/>
         <result property='fechafinrenta' column='fechafinrenta'/>  
-        <association property="item" javaType="Item"></association>   -->   
-    </resultMap>                     
+        <association property="item" javaType="Item"></association>  
+    </resultMap>        
+    
+    <resultMap type='Item' id='ClienteResult'>
+        <id property='id' column='id'/>
+        <result property='nombre' column='nombre'/>
+        <result property='descripcion' column='descripcion'/>  
+        <result property='fechaLanzamiento' column='fechalanzamiento'/> 
+        <result property='tarifaxDia' column='tarifaxdia'/>
+        <result property='formatoRenta' column='formatorenta'/>
+        <result property='genero' column='genero'/>
+        <association property="tipo" javaType="TipoItem"></association>    
+    </resultMap> 
+    
+    <resultMap type='TipoItem' id='ClienteResult'>
+        <id property='id' column='id'/>
+        <result property='descripcion' column='descripcion'/>      
+    </resultMap>
+                
+                  
                                     	
 </mapper>
