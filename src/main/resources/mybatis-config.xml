@@ -27,6 +27,5 @@
         <mapper resource="mappers/ItemMapper.xml"></mapper>        
         <mapper resource="mappers/TipoItemMapper.xml"></mapper>        
     </mappers> 
-        
-        
+
 </configuration>
