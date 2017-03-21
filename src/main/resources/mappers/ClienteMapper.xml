@@ -15,20 +15,21 @@
         c.email,
         c.vetado,
     
-        ir.id ,
-        ir.CLIENTES_documento ,
-        ir.fechainiciorenta ,
-        ir.fechafinrenta ,
+        ir.id as ItemRentado_id,
+        ir.CLIENTES_documento as ItemRentado_documento_Cliente,
+        ir.fechainiciorenta as ItemRentado_fechainiciorenta,
+        ir.fechafinrenta as ItemRentado_fechafinrenta,
     
-        i.id ,
-        i.nombre ,
-        i.descripcion ,
-        i.fechalanzamiento ,
-        i.tarifaxdia ,
-        i.formatorenta ,
-        i.genero ,        
-        ti.id ,
-        ti.descripcion 
+        i.id as  Item_id,
+        i.nombre as  Item_nombre,
+        i.descripcion as  Item_descripcion,
+        i.fechalanzamiento as  Item_fechalanzamiento,
+        i.tarifaxdia as Item_tarifaxdia,
+        i.formatorenta as Item_formatorenta,
+        i.genero as Item_genero,        
+        
+        ti.id as TipoItem_id ,
+        ti.descripcion TipoItem_descripcion 
 
     
         FROM VI_CLIENTES as c 
@@ -37,7 +38,40 @@
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
         
     </select>
-      
+       <select parameterType="map" id="getCliente" resultMap="ClienteResult">
+        select
+    
+        c.nombre,
+        c.documento,
+        c.telefono,
+        c.direccion,
+        c.email,
+        c.vetado,
+    
+        ir.id as ItemRentado_id,
+        ir.CLIENTES_documento as ItemRentado_documento_Cliente,
+        ir.fechainiciorenta as ItemRentado_fechainiciorenta,
+        ir.fechafinrenta as ItemRentado_fechafinrenta,
+    
+        i.id as  Item_id,
+        i.nombre as  Item_nombre,
+        i.descripcion as  Item_descripcion,
+        i.fechalanzamiento as  Item_fechalanzamiento,
+        i.tarifaxdia as Item_tarifaxdia,
+        i.formatorenta as Item_formatorenta,
+        i.genero as Item_genero,        
+        
+        ti.id as TipoItem_id ,
+        ti.descripcion TipoItem_descripcion 
+
+    
+        FROM VI_CLIENTES as c 
+        left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+        left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+           Where c.documento=#{documento}
+        
+    </select>
 
     <resultMap type='Cliente' id='ClienteResult' >
         <id property='nombre' column='nombre'/>
@@ -46,11 +80,10 @@
         <result property='direccion' column='direccion'/> 
         <result property='email' column='email'/>   
         <result property='vetado' column='vetado'/>  
-        <collection property='rentados' javaType='ItemRentado' resultMap='ItemRentadoResult' columnPrefix='ItemRentado_'></collection>
-        <!-- <association property="propiedad5" javaType="DetalleDos"></association>   -->   
+        <collection property='rentados' ofType='ItemRentado' resultMap='ItemRentadoResult' columnPrefix='ItemRentado_'></collection>
     </resultMap>       
              
-        <resultMap type='ItemRentado' id='ItemRentadoResult'>
+    <resultMap type='ItemRentado' id='ItemRentadoResult'>
         <id property='id' column='id'/>
         <result property='fechainiciorenta' column='fechainiciorenta'/>
         <result property='fechafinrenta' column='fechafinrenta'/>  
@@ -72,7 +105,5 @@
         <id property='id' column='id'/>
         <result property='descripcion' column='descripcion'/>      
     </resultMap>
-                
-                  
-                                    	
+                           	
 </mapper>
