@@ -19,6 +19,9 @@ package edu.eci.pdsw.samples.services.client;
 
 
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.pdsw.samples.entities.Item;
+import edu.eci.pdsw.samples.entities.TipoItem;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -64,19 +67,26 @@ public class MyBatisExample {
         SqlSessionFactory sessionfact = getSqlSessionFactory();
         SqlSession sqlss = sessionfact.openSession();
 
-        
         //Crear el mapper y usarlo: 
-        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
-        System.out.println(cm.getCliente(1026585665));
-        //cm...
-       Date fechai=java.sql.Date.valueOf("2005-12-20");
-        Date fechaf=java.sql.Date.valueOf("2006-12-20");
+        ClienteMapper cm = sqlss.getMapper(ClienteMapper.class);
+        System.out.println(cm.getCliente(1026585665));  //consultar un cliente
         
-        cm.agregarItemrentadoACliente(100000001,1026585665,2500, fechai, fechaf);
+
+
+        //fechas para agregar un item a un cliente 
+        Date fechai = java.sql.Date.valueOf("2005-12-20");
+        Date fechaf = java.sql.Date.valueOf("2006-12-20");
+        // cm.agregarItemrentadoACliente(100000001,1026585665,2500, fechai, fechaf);
         
+        //crear un item
+        TipoItem tipo = new TipoItem(101, "musica");
+        ItemMapper im = sqlss.getMapper(ItemMapper.class);
+       // Item it = new Item(tipo, 3030, "Ralph", "pelicula animada", fechai, 4000, "DVD", "infantil");
+       // im.insertarItem(it);       
+       
+        System.out.println(im.consultarItem(3030));// consultar item
         sqlss.commit();
-        
-        
+
         sqlss.close();
 
         

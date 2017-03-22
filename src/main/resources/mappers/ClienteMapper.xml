@@ -92,23 +92,14 @@
         <id property='id' column='id'/>
         <result property='fechainiciorenta' column='fechainiciorenta'/>
         <result property='fechafinrenta' column='fechafinrenta'/>  
-        <association property='item' javaType='Item' columnPrefix='Item_'></association>  
+        <association property='item' javaType='Item' columnPrefix='Item_' resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association>  
     </resultMap>        
     
-    <resultMap type='Item' id='ItemResult'>
-        <id property='id' column='id'/>
-        <result property='nombre' column='nombre'/>
-        <result property='descripcion' column='descripcion'/>  
-        <result property='fechaLanzamiento' column='fechalanzamiento'/> 
-        <result property='tarifaxDia' column='tarifaxdia'/>
-        <result property='formatoRenta' column='formatorenta'/>
-        <result property='genero' column='genero'/>
-        <association property='tipo' javaType='TipoItem' columnPrefix='TipoItem_'></association>    
-    </resultMap> 
-    
+   
+   <!-- 
     <resultMap type='TipoItem' id='TipoItemResult'>
         <id property='id' column='id'/>
         <result property='descripcion' column='descripcion'/>      
-    </resultMap>
+    </resultMap>-->
                            	
 </mapper>
