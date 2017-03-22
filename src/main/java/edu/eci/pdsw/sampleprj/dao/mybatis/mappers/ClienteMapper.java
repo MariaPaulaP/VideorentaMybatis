@@ -20,7 +20,7 @@ public interface ClienteMapper {
      * @param fechainicio
      * @param fechafin 
      */
-    public void agregarItemRentadoACliente(int id, 
+    public void agregarItemrentadoACliente(int id, 
             int idit, 
             Date fechainicio,
             Date fechafin);
@@ -29,7 +29,9 @@ public interface ClienteMapper {
      * Consultar todos los clientes
      * @return 
      */
-    public Cliente getCliente(int id);
+    public Cliente getCliente(@Param("documento") int id);
+
+    public void agregarItemrentadoACliente(@Param("id")int i,@Param("documento")int i0, @Param("idi")int i1, @Param("fechainic")Date fechai,@Param("fechafinal") Date fechaf);
 
   
     

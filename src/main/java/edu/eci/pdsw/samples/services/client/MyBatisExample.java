@@ -22,6 +22,7 @@ import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Date;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -68,8 +69,10 @@ public class MyBatisExample {
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
         System.out.println(cm.getCliente(1026585665));
         //cm...
+       Date fechai=java.sql.Date.valueOf("2005-12-20");
+        Date fechaf=java.sql.Date.valueOf("2006-12-20");
         
-        
+        cm.agregarItemrentadoACliente(100000001,1026585665,2500, fechai, fechaf);
         
         sqlss.commit();
         

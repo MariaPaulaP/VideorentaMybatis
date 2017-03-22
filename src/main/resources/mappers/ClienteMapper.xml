@@ -72,7 +72,12 @@
            Where c.documento=#{documento}
         
     </select>
-
+    
+    <insert id="agregarItemrentadoACliente" parameterType="map">
+        INSERT INTO VI_ITEMRENTADO(id,CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta)
+        VALUES (#{id},#{documento},#{idi},#{fechainic},#{fechafinal})
+    </insert>
+    
     <resultMap type='Cliente' id='ClienteResult' >
         <id property='nombre' column='nombre'/>
         <result property='documento' column='documento'/>
